@@ -1,0 +1,31 @@
+body {
+  background-color: #000;
+  color: gold;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+.container {
+  margin-top: 50px;
+}
+input, button {
+  padding: 10px;
+  margin: 5px;
+  font-size: 16px;
+}
+button {
+  background-color: gold;
+  color: black;
+  border: none;
+  cursor: pointer;
+}
+.status-message {
+  margin-top: 5px;
+  font-size: 0.9em;
+  color: #ccc;
+}
+.status-message.error {
+  color: #ff4d4d;
+}
+.status-message.success {
+  color: #4CAF50;
+}
