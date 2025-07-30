@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>KJC Referral System</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css"> <script src="https://cdn.jsdelivr.net/npm/web3@1.10.0/dist/web3.min.js"></script>
+  <script src="config.js"></script> <script src="main.js"></script> </head>
+<body>
+  <div class="container">
+    <h1>🎁 KJC Referral System</h1>
+
+    <button id="connectWalletBtn">🔗 เชื่อมต่อกระเป๋า</button>
+    <p id="walletAddress" class="status-message">❌ ยังไม่เชื่อมต่อกระเป๋า</p>
+
+    <label>📨 ลิงก์แนะนำของคุณ:</label>
+    <input type="text" id="refLink" readonly placeholder="โปรดเชื่อมต่อกระเป๋าเพื่อสร้างลิงก์">
+    <button id="copyRefLinkBtn">📋 คัดลอกลิงก์</button>
+
+    <hr/>
+
+    <label>✉️ ใส่ Address ผู้นำแนะนำ:</label>
+    <input type="text" id="refAddress" placeholder="Referrer Address">
+    <button id="registerReferrerBtn">📌 สมัคร Referrer</button>
+    <p id="registerStatus" class="status-message"></p> <label>💸 จำนวน USDT ที่จะใช้ซื้อ:</label>
+    <input type="number" step="0.01" id="usdtAmount" value="10">
+    <button id="buyTokenBtn">💰 ซื้อเหรียญ KJC</button>
+    <p id="buyTokenStatus" class="status-message"></p> <hr/>
+
+    <h2>📈 Your Stake</h2>
+    <p id="stakeAmount">กำลังโหลด...</p>
+    <button id="claimStakeRewardBtn">💰 เคลมรางวัล Your Stake</button>
+    <p id="claimStakeStatus" class="status-message" style="margin-top: 10px;"></p>
+
+    <hr/>
+
+    <h2>🤝 Referral Rewards</h2>
+    <p id="referralRewardAmount">กำลังโหลด...</p>
+    <button id="claimReferralRewardBtn">💰 เคลมรางวัลค่าแนะนำ</button>
+    <p id="referralClaimStatus" class="status-message" style="margin-top: 10px;"></p>
+
+  </div>
+
+  <style>
+    .status-message {
+      margin-top: 5px;
+      font-size: 0.9em;
+      color: #ccc; /* สีข้อความทั่วไป */
+    }
+    .status-message.error {
+      color: #ff4d4d; /* สีแดงสำหรับ Error */
+    }
+    .status-message.success {
+      color: #4CAF50; /* สีเขียวสำหรับ Success */
+    }
+  </style>
+</body>
+</html>
