@@ -1,4 +1,4 @@
-/a/ main.js
+// main.js
 
 // ตรวจสอบว่า web3.js ถูกโหลดแล้ว
 if (typeof Web3 === 'undefined') {
