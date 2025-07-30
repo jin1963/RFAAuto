@@ -1,4 +1,4 @@
-// main.js
+/a/ main.js
 
 // ตรวจสอบว่า web3.js ถูกโหลดแล้ว
 if (typeof Web3 === 'undefined') {
@@ -104,6 +104,8 @@ function tokenToWei(tokenAmount, decimals) {
         return web3.utils.toWei(tokenAmount.toString(), 'ether'); 
     }
 }
+
+
 // --- Main DApp Functions ---
 
 async function connectWallet() {
@@ -230,6 +232,7 @@ async function connectWallet() {
     document.getElementById("walletAddress").classList.add("error");
   }
 }
+
 function generateReferralLink() {
   if (!account) {
     document.getElementById("refLink").value = "โปรดเชื่อมต่อกระเป๋าเพื่อสร้างลิงก์";
@@ -282,8 +285,8 @@ async function registerReferrer() {
     const receipt = await web3.eth.getTransactionReceipt(txResponse.transactionHash);
     
     if (receipt && receipt.status) {
-        document.getElementById("registerStatus").innerText = "✅ สมัคร Referrer สำเร็จแล้ว!"; 
-        document.getElementById("registerStatus").classList.add("success");
+        document.getElementById("registerStatus"].innerText = "✅ สมัคร Referrer สำเร็จแล้ว!"; 
+        document.getElementById("registerStatus"].classList.add("success");
         console.log("registerReferrer: Confirmed:", receipt);
     } else {
         document.getElementById("registerStatus"].innerText = "❌ การสมัคร Referrer ไม่สำเร็จ หรือธุรกรรมถูกปฏิเสธ";
@@ -294,11 +297,12 @@ async function registerReferrer() {
   } catch (e) {
     console.error("registerReferrer: Error:", e);
     const errorMessage = getFriendlyErrorMessage(e);
-    document.getElementById("registerStatus").innerText = `❌ เกิดข้อผิดพลาดในการสมัคร Referrer: ${errorMessage}`;
+    document.getElementById("registerStatus"].innerText = `❌ เกิดข้อผิดพลาดในการสมัคร Referrer: ${errorMessage}`;
     document.getElementById("registerStatus"].classList.add("error");
     alert(`❌ เกิดข้อผิดพลาดในการสมัคร Referrer: ${errorMessage}`);
   }
 }
+
 async function buyToken() {
   if (!stakingContract || !account || !usdtContract || !routerContract || typeof usdtDecimals === 'undefined' || typeof kjcDecimals === 'undefined') {
     alert("⚠️ กำลังโหลดข้อมูล กรุณารอสักครู่แล้วลองใหม่");
@@ -348,7 +352,7 @@ async function buyToken() {
 
     if (BigInt(allowance) < BigInt(usdtInWei)) {
       console.log("buyToken: Allowance insufficient. Initiating approval...");
-      document.getElementById("buyTokenStatus"].innerText = "กำลังขออนุมัติ USDT...";
+      document.getElementById("buyTokenStatus").innerText = "กำลังขออนุมัติ USDT...";
       const approveTx = await usdtContract.methods.approve(contractAddress, usdtInWei).send({ from: account });
       console.log("buyToken: Approve Transaction Hash:", approveTx.transactionHash);
       alert("✅ การอนุมัติ USDT สำเร็จแล้ว! กรุณากด 'ซื้อเหรียญ KJC' อีกครั้งเพื่อดำเนินการ Stake.");
@@ -364,7 +368,7 @@ async function buyToken() {
     const buyTx = await stakingContract.methods.buyAndStake(usdtInWei, minOut.toString()).send({ from: account });
     console.log("buyToken: Buy and Stake Transaction Hash:", buyTx.transactionHash);
 
-    document.getElementById("buyTokenStatus").innerText = "กำลังรอการยืนยันการซื้อ KJC...";
+    document.getElementById("buyTokenStatus"].innerText = "กำลังรอการยืนยันการซื้อ KJC...";
     const receipt = await web3.eth.getTransactionReceipt(buyTx.transactionHash);
 
     if (receipt && receipt.status) {
@@ -375,18 +379,19 @@ async function buyToken() {
         loadReferralInfo(); 
     } else {
         alert(`❌ การซื้อ ${usdtAmountFloat} USDT และ Stake ไม่สำเร็จ หรือธุรกรรมถูกปฏิเสธ`);
-        document.getElementById("buyTokenStatus").innerText = `❌ การซื้อ KJC ไม่สำเร็จ!`;
+        document.getElementById("buyTokenStatus"].innerText = `❌ การซื้อ KJC ไม่สำเร็จ!`;
         document.getElementById("buyTokenStatus"].classList.add("error");
     }
 
   } catch (e) {
     console.error("buyToken: Error:", e);
     const errorMessage = getFriendlyErrorMessage(e);
-    document.getElementById("buyTokenStatus").innerText = `❌ ข้อผิดพลาด: ${errorMessage}`;
-    document.getElementById("buyTokenStatus"].classList.add("error");
     alert(`❌ เกิดข้อผิดพลาดในการซื้อเหรียญ: ${errorMessage}`);
+    document.getElementById("buyTokenStatus"].innerText = `❌ ข้อผิดพลาด: ${errorMessage}`;
+    document.getElementById("buyTokenStatus"].classList.add("error");
   }
 }
+
 async function loadStakingInfo() {
   if (!stakingContract || !account || typeof kjcDecimals === 'undefined') {
       document.getElementById("stakeAmount").innerText = "⚠️ กำลังโหลดข้อมูล...";
@@ -437,7 +442,7 @@ async function claimReward() {
       const tx = await stakingContract.methods.claimStakingReward().send({ from: account });
       console.log("claimReward: Tx Hash:", tx.transactionHash);
       
-      document.getElementById("claimStakeStatus"].innerText = "กำลังรอการยืนยันการเคลมรางวัล Stake...";
+      document.getElementById("claimStakeStatus").innerText = "กำลังรอการยืนยันการเคลมรางวัล Stake...";
       const receipt = await web3.eth.getTransactionReceipt(tx.transactionHash);
 
       if (receipt && receipt.status) {
@@ -458,7 +463,7 @@ async function claimReward() {
       let waitString = "";
       if (waitHours > 0) waitString += `${waitHours} ชั่วโมง `;
       if (remainingMinutes > 0 || waitHours === 0) waitString += `${remainingMinutes} นาที`;
-      document.getElementById("claimStakeStatus"].innerText = `⏳ ต้องรออีก ${waitString}`;
+      document.getElementById("claimStakeStatus").innerText = `⏳ ต้องรออีก ${waitString}`;
     }
   } catch (e) {
     console.error("claimReward: Error:", e);
@@ -485,7 +490,7 @@ async function loadReferralInfo() {
     console.log("loadReferralInfo: Referral info loaded successfully.");
   } catch (e) {
     console.error("loadReferralInfo: Error loading referral info:", e);
-    document.getElementById("referralRewardAmount"].innerText = "❌ โหลดค่าแนะนำไม่สำเร็จ: " + (e.message || "Unknown error");
+    document.getElementById("referralRewardAmount").innerText = "❌ โหลดค่าแนะนำไม่สำเร็จ: " + (e.message || "Unknown error");
     document.getElementById("referralRewardAmount"].classList.add("error");
   }
 }
@@ -601,6 +606,3 @@ window.ethereum?.on('chainChanged', (chainId) => {
     console.log("Chain changed event detected:", chainId);
     connectWallet();
 });
-
-
-
